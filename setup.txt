@@ -1,0 +1,24 @@
+## Setup steps
+# Create virtual environment
+py -m venv venv
+
+# remove environment
+rmdir /s /q venv
+
+# Activate environment : 
+venv\Scripts\activate 
+
+# List down all the pip install library 
+pip freeze > requirements.txt
+
+#install from the file
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+
+uvicorn app.main:app --reload --reload-dir app
+uvicorn main:app --host 0.0.0.0 --port 8000 --ssl-keyfile=key.pem --ssl-certfile=cert.pem --reload --reload-dir app
+uvicorn app.main:app --reload --reload-dir app --ssl-keyfile=key.pem --ssl-certfile=cert.pem
+
+
+pip install watchfiles
