@@ -73,3 +73,4 @@ urllib3==2.5.0
 uvicorn==0.37.0
 watchfiles==1.1.1
 zstandard==0.25.0
+sentence-transformers==2.5.5
