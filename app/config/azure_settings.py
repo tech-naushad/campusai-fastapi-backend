@@ -3,9 +3,17 @@ from dotenv import load_dotenv
 
 class AzureSettings:
     def __init__(self):
+        # load root env first for local development
+        load_dotenv()  # loads root .env first
         # Load environment variables from .env file
-        app_env = os.getenv("ENV", "development")
-        env_file = f".env.{app_env}"
+        current_env = os.getenv("ENV")
+        print(f"Current ENV: {current_env}")
+        if not current_env:
+            raise ValueError("ENV environment variable is not set.")
+
+        env_file = f"env/{current_env}.env" 
+        #app_env = os.getenv("ENV", "dev")
+        #env_file = f".env.{env_file}"
         load_dotenv(env_file)
         
         self.azure_tenant_id = os.getenv("AZURE_TENANT_ID")

@@ -6,6 +6,7 @@ import httpx
 from app.middlewares.cors_middleware import CorsMiddleware
 from app.middlewares.token_middleware import TokenMiddleware
 from app.api.auth import router as auth_router
+from app.api.chat import router as chat_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,7 +31,7 @@ app.add_middleware(TokenMiddleware)
 app.add_middleware(CorsMiddleware)
 
 app.include_router(auth_router, prefix="/api/v1", tags=["Auth"])
-#app.include_router(chat_router, prefix="/api/v1", tags=["Auth"])
+app.include_router(chat_router, prefix="/api/v1", tags=["Chat"])
 
 # HEALTH CHECK
 @app.get("/health")

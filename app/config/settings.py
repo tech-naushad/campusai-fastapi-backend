@@ -3,9 +3,16 @@ from dotenv import load_dotenv
 
 class Settings:
     def __init__(self):
+        load_dotenv()  # loads root .env first
         # Load environment variables from .env file
-        app_env = os.getenv("ENV", "development")
-        env_file = f".env.{app_env}"
+        current_env = os.getenv("ENV")
+        print(f"Current ENV: {current_env}")
+        if not current_env:
+            raise ValueError("ENV environment variable is not set.")
+
+        env_file = f"env/{current_env}.env" 
+        #app_env = os.getenv("ENV", "dev")
+        #env_file = f".env.{env_file}"
         load_dotenv(env_file)
 
         self.pinecone_api_key = os.getenv("PINECONE_API_KEY")
